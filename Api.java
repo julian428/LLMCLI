@@ -26,12 +26,28 @@ public class Api{
 
 		try{
 			HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+			String responsePrompt = jsonParser(response.body(), "response");
 
-			return response.body();
+			return responsePrompt;
 		}
 		catch(Exception e){
 			e.printStackTrace();
 			return "";
 		}
+	}
+
+	public static String jsonParser(String jsonBody, String key){
+		jsonBody = jsonBody.replaceAll("[{}]", "");
+		String [] keyValuePairs = jsonBody.split(",\"");
+
+		for(String pair : keyValuePairs){
+			String [] rawEntry = pair.split("\":");
+			String currentKey = rawEntry[0].trim();
+			String currentValue = rawEntry[1].trim().replaceAll("[\"]", "");
+
+			if(key.equals(currentKey)) return currentValue;
+		}
+
+		return "";
 	}
 }
