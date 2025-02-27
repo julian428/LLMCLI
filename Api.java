@@ -6,15 +6,15 @@ import java.net.http.HttpRequest.BodyPublishers;
 import java.time.Duration;
 
 public class Api{
-	private static String model = "qwen:0.5b";
-	private static String endpoint = "http://localhost:11434";
+	private String model;
+	private String endpoint;
 
-	public static void main(String [] args){
-		String res = generateResponse("Why is the sky blue?");
-		System.out.println(res);
+	public Api(String model, String endpoint){
+		this.model = model;
+		this.endpoint = endpoint;
 	}
 
-	public static String generateResponse(String prompt){
+	public String generateResponse(String prompt){
 		HttpClient client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(10)).build();
 
 		String jsonBody = "{\"model\": \"" + model + "\", \"prompt\": \"" + prompt + "\", \"stream\": false}";
@@ -36,7 +36,7 @@ public class Api{
 		}
 	}
 
-	public static String jsonParser(String jsonBody, String key){
+	public String jsonParser(String jsonBody, String key){
 		jsonBody = jsonBody.replaceAll("[{}]", "");
 		String [] keyValuePairs = jsonBody.split(",\"");
 
