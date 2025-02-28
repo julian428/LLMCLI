@@ -5,7 +5,7 @@ public class Interface{
 
 	public void menu(){
 		Scanner input = new Scanner(System.in);
-		clear();
+		Utils.clear();
 		System.out.println("Console LLM");
 
 		System.out.print("Choose a model: ");
@@ -24,12 +24,8 @@ public class Interface{
 		Api api = new Api(this.model, "http://localhost:11434");
 		System.out.print("response: ");
 		String response = api.generateResponse(prompt);
+		response = response.replace("\\n", "\n");
 		System.out.println(response);
 		return true;
-	}
-
-	public void clear(){
-		System.out.print("\033[H\033[2J");
-		System.out.flush();
 	}
 }
