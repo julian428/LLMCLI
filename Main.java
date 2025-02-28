@@ -3,7 +3,7 @@ public class Main{
 		Interface ui = new Interface();
 		
 		ui.menu();
-		ui.clear();
+		Utils.clear();
 		while(ui.loop());
 	}
 }
