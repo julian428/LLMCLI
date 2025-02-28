@@ -3,13 +3,14 @@ import java.util.Scanner;
 public class Interface{
 	public static void main(String[] args){
 		System.out.println("Welcome to dumGPT");
-		
+			
 		clear();
-		while(loop());
+
+		Scanner input = new Scanner(System.in);
+		while(loop(input));
 	}
 
-	private static boolean loop(){
-		Scanner input = new Scanner(System.in);
+	private static boolean loop(Scanner input){
 		System.out.print("prompt: ");
 		String prompt = input.nextLine();
 
