@@ -24,6 +24,7 @@ public class Interface{
 		Api api = new Api(this.model, "http://localhost:11434");
 		System.out.print("response: ");
 		String response = api.generateResponse(prompt);
+		response = response.replace("\\n", "\n");
 		System.out.println(response);
 		return true;
 	}
