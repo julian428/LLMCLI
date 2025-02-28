@@ -1,28 +1,34 @@
 import java.util.Scanner;
 
 public class Interface{
-	public static void main(String[] args){
-		System.out.println("Welcome to dumGPT");
-			
-		clear();
+	private String model;
 
+	public void menu(){
 		Scanner input = new Scanner(System.in);
-		while(loop(input));
+		clear();
+		System.out.println("Console LLM");
+
+		System.out.print("Choose a model: ");
+		String model = input.nextLine();
+
+		this.model = model;
 	}
 
-	private static boolean loop(Scanner input){
+	public boolean loop(){
+		Scanner input = new Scanner(System.in);
 		System.out.print("prompt: ");
 		String prompt = input.nextLine();
 
 		if(prompt.equals("!q")) return false;
 
 		Api api = new Api("qwen:0.5b", "http://localhost:11434");
+		System.out.print("response: ");
 		String response = api.generateResponse(prompt);
-		System.out.println("response: " + response);
+		System.out.println(response);
 		return true;
 	}
 
-	private static void clear(){
+	public void clear(){
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
 	}
