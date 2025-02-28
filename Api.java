@@ -11,7 +11,7 @@ public class Api{
 		String jsonBody = "{\"model\": \"" + model + "\", \"prompt\": \"" + prompt + "\", \"stream\": false}";
 
 		try{
-			String response = Utils.HttpRequest(endpoint + "/api/generate", jsonBody);
+			String response = Utils.HttpRequest(endpoint + "/api/generate", "post", jsonBody);
 			String responsePrompt = Utils.jsonParser(response, "response");
 
 			return responsePrompt;
