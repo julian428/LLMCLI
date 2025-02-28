@@ -26,7 +26,7 @@ public class Api{
 
 		try{
 			HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-			String responsePrompt = jsonParser(response.body(), "response");
+			String responsePrompt = Utils.jsonParser(response.body(), "response");
 
 			return responsePrompt;
 		}
@@ -34,20 +34,5 @@ public class Api{
 			e.printStackTrace();
 			return "";
 		}
-	}
-
-	public String jsonParser(String jsonBody, String key){
-		jsonBody = jsonBody.replaceAll("[{}]", "");
-		String [] keyValuePairs = jsonBody.split(",\"");
-
-		for(String pair : keyValuePairs){
-			String [] rawEntry = pair.split("\":");
-			String currentKey = rawEntry[0].trim();
-			String currentValue = rawEntry[1].trim().replaceAll("[\"]", "");
-
-			if(key.equals(currentKey)) return currentValue;
-		}
-
-		return "";
 	}
 }
