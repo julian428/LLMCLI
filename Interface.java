@@ -21,7 +21,7 @@ public class Interface{
 
 		if(prompt.equals("!q")) return false;
 
-		Api api = new Api("qwen:0.5b", "http://localhost:11434");
+		Api api = new Api(this.model, "http://localhost:11434");
 		System.out.print("response: ");
 		String response = api.generateResponse(prompt);
 		System.out.println(response);
